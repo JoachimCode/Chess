@@ -9,9 +9,10 @@ public class Square {
     private int width = 100;
     private int height = 100;
     private int[] cords;
-
+    Engine engine;
     public JButton square;
-    public Square(int number, JLayeredPane layeredPane){
+    public Square(int number, JLayeredPane layeredPane, Engine engine){
+        this.engine = engine;
         // Assign x and y coordinates
         if(number <= 8){
             x_cor = 600 + 100*number;
@@ -81,9 +82,8 @@ public class Square {
         layeredPane.add(square, 0);
     }
 
-
-    public int[] get_cord(){
+    public void get_cord(){
         System.out.println(String.valueOf(x_cor) + String.valueOf(y_cor));
-        return cords;
+        engine.click_empty(cords);
     }
 }

@@ -7,33 +7,54 @@ public class Piece {
     private int y_cor;
     private int width = 100;
     private int height = 100;
+    private String name;
     private String type;
-    private int color;
+    private boolean is_white;
     private JButton piece;
-    public Piece(String piece, int color, int number, JLayeredPane layeredPane){
+    public Piece(String piece, boolean is_white, int number, JLayeredPane layeredPane){
         //Pawn
-        if(piece == "pawn" && color == 0){
+        if(piece == "pawn" && is_white){
             type = "pawn";
-            this.color = 0;
+            name = "WPawn";
+            this.is_white = true;
             x_cor = 600 + 100*(number);
             y_cor = 700;
             this.piece = new JButton("Wpawn");
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, 1);
         }
-
+        else if(piece == "pawn" && !is_white){
+            type = "pawn";
+            name = "Bpawn";
+            this.is_white = false;
+            x_cor = 600 + 100*(number);
+            y_cor = 200;
+            this.piece = new JButton("Bpawn");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, 1);
+        }
 
     }
 
-    public void move(){
+    public void move(int[] cords){
+        int x = cords[0];
+        int y = cords[1];
+        piece.setBounds(x,y,100,100);
+    }
 
+    public void show(){
+        piece.setText("selected");
+
+    }
+    public void de_select(){
+        piece.setText(name);
     }
 
     public String get_type(){
         return type;
     }
-    public int get_color(){
-        return color;
+    public boolean get_white(){
+        return is_white;
     }
     public int get_x(){
         return x_cor;
@@ -45,5 +66,8 @@ public class Piece {
 
     public boolean get_start(){
         return start;
+    }
+    public JButton get_piece(){
+        return piece;
     }
 }
