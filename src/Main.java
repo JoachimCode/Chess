@@ -18,8 +18,9 @@ public class Main {
             board_piece.square.addActionListener(e -> board_piece.get_cord());
         }
 
-        //Setup white list
+        //Setup both list
         java.util.List<Piece> white_pieces = new ArrayList<Piece>();
+        java.util.List<Piece> black_pieces = new ArrayList<Piece>();
 
         //Setup white pawns
         for (int i = 1; i <= 8; i++) {
@@ -32,9 +33,12 @@ public class Main {
         for (int i = 1; i <= 8; i++) {
             Piece black_pawn = new Piece("pawn", false, i, layeredPane);
             black_pawn.get_piece().addActionListener(e -> move_checker.get_moves(black_pawn, true, engine));
-            //make black hashmap !!!black_pieces.add(white_pawn);
+            black_pieces.add(black_pawn);
         }
 
+
+        // parse lists into moves
+        engine.get_list(white_pieces, black_pieces);
 
         root.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         root.setSize(1920,1080);

@@ -40,6 +40,9 @@ public class Piece {
         int x = cords[0];
         int y = cords[1];
         piece.setBounds(x,y,100,100);
+        this.x_cor = x;
+        this.y_cor = y;
+        start = false;
     }
 
     public void show(){
