@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
@@ -32,10 +33,15 @@ public class Main {
         //Setup black pawns
         for (int i = 1; i <= 8; i++) {
             Piece black_pawn = new Piece("pawn", false, i, layeredPane);
-            black_pawn.get_piece().addActionListener(e -> move_checker.get_moves(black_pawn, true, engine));
+            black_pawn.get_piece().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    move_checker.get_cords(black_pawn, engine);
+                    move_checker.get_moves(black_pawn, true, engine);
+                }
+            });
             black_pieces.add(black_pawn);
         }
-
 
         // parse lists into moves
         engine.get_list(white_pieces, black_pieces);

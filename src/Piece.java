@@ -11,6 +11,7 @@ public class Piece {
     private String type;
     private boolean is_white;
     private JButton piece;
+    private JLayeredPane frame;
     public Piece(String piece, boolean is_white, int number, JLayeredPane layeredPane){
         //Pawn
         if(piece == "pawn" && is_white){
@@ -48,6 +49,11 @@ public class Piece {
     public void show(){
         piece.setText("selected");
 
+    }
+
+    public void remove_black(java.util.List<Piece> black_pieces, Piece current_piece){
+        black_pieces.remove(current_piece);
+        piece.setBounds(2000,2000,100,100);
     }
     public void de_select(){
         piece.setText(name);

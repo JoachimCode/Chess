@@ -4,11 +4,12 @@ public class Engine {
     public Piece last_piece;
     public Piece current_piece;
     private int phase = 0;
-    private boolean white_turn = true;
+    public boolean white_turn = true;
     private java.util.List<int[]> move_set;
     private int[] destination;
     private java.util.List white_pieces;
-    private java.util.List black_pieces;
+    private java.util.List<Piece> black_pieces;
+    public int[] piece_cords;
 
     public void set_move(java.util.List<int[]> moves){
         move_set = moves;
@@ -33,11 +34,12 @@ public class Engine {
             phase = 1;
         }
 
-
         else if(phase == 1 && white_turn && !piece.get_white()){
-            System.out.println("Take piece !!");
+            if(check_white_take(piece_cords)){
+                move_piece(piece_cords);
+                current_piece.remove_black(black_pieces, current_piece);
+            }
         }
-
     }
 
     public void click_empty(int[] cords){
@@ -67,8 +69,15 @@ public class Engine {
     }
 
     public boolean check_white_take(int[] cords){
-        return true;
-    }
+        for(Piece take_list : black_pieces){
+            int piece_x = take_list.get_x();
+            int piece_y = take_list.get_y();
+            if(cords[0] == piece_x && cords[1] == piece_y){
+                return true;
+            }
+            }
+        return false;
+        }
 
 
     public void move_piece(int[] cords){
@@ -78,7 +87,7 @@ public class Engine {
         white_turn = !white_turn;
     }
 
-    public void get_list(java.util.List white_list, java.util.List black_list){
+    public void get_list(java.util.List<Piece> white_list, java.util.List<Piece> black_list){
         white_pieces = white_list;
         black_pieces = black_list;
     }
