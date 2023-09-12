@@ -55,6 +55,11 @@ public class Piece {
         black_pieces.remove(current_piece);
         piece.setBounds(2000,2000,100,100);
     }
+
+    public void remove_white(java.util.List<Piece> white_pieces, Piece current_piece){
+        white_pieces.remove(current_piece);
+        piece.setBounds(2000,2000,100,100);
+    }
     public void de_select(){
         piece.setText(name);
     }
