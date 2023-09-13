@@ -44,7 +44,7 @@ public class Engine {
         else if(phase == 1 && !white_turn && piece.get_white()){
             if(check_black_take(piece_cords)){
                 move_piece(piece_cords);
-                current_piece.remove_black(white_pieces, current_piece);
+                current_piece.remove_white(white_pieces, current_piece);
             }
         }
     }
@@ -76,7 +76,9 @@ public class Engine {
     }
 
     public boolean check_white_take(int[] cords){
+        move_set.add(cords);
         if(check_white(cords)){
+            move_set.clear();
         for(Piece take_list : black_pieces){
             int piece_x = take_list.get_x();
             int piece_y = take_list.get_y();
@@ -89,7 +91,9 @@ public class Engine {
         }
 
     public boolean check_black_take(int[] cords){
+        move_set.add(cords);
         if(check_black(cords)){
+            move_set.clear();
             for(Piece take_list : white_pieces){
                 int piece_x = take_list.get_x();
                 int piece_y = take_list.get_y();

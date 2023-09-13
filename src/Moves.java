@@ -24,7 +24,10 @@ public class Moves {
             }
             black_pawn_move(piece, false);
         }
-
+        //check white bishops
+        if(Objects.equals(piece.get_type(), "bishop")){
+            bishop_move(piece);
+        }
         engine.set_move(possible_moves);
         engine.click_piece(piece);
     }
@@ -47,7 +50,7 @@ public class Moves {
     }
 
     public int move(String direction){
-        if(direction == "up" || direction == "right"){
+        if(direction == "up" || direction == "left"){
             return -100;
         }
         else{
@@ -78,6 +81,28 @@ public class Moves {
             y = piece.get_y() + move("down");
         }
         put_moves(x,y);
+    }
+
+    private void bishop_move(Piece piece){
+        int x;
+        int y;
+        for(int i = 1; i <= 8; i++){
+            x = piece.get_x() + move("right")*i;
+            y = piece.get_y() + move("up")*i;
+            put_moves(x,y);
+
+            x = piece.get_x() + move("left")*i;
+            y = piece.get_y() + move("up")*i;
+            put_moves(x,y);
+
+            x = piece.get_x() + move("left")*i;
+            y = piece.get_y() + move("down")*i;
+            put_moves(x,y);
+
+            x = piece.get_x() + move("right")*i;
+            y = piece.get_y() + move("down")*i;
+            put_moves(x,y);
+        }
     }
 }
 

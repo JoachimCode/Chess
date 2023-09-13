@@ -13,6 +13,7 @@ public class Piece {
     private JButton piece;
     private JLayeredPane frame;
     public Piece(String piece, boolean is_white, int number, JLayeredPane layeredPane){
+        frame = layeredPane;
         //Pawn
         if(piece == "pawn" && is_white){
             type = "pawn";
@@ -34,7 +35,41 @@ public class Piece {
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, 1);
         }
+        else if(piece == "bishop" && is_white){
+            type = "bishop";
+            name = "wbishop";
+            this.is_white = true;
+            switch(number){
+                case 1:
+                    x_cor = 900;
+                    break;
+                case 2:
+                    x_cor = 1200;
+                    break;
+            }
+            y_cor = 800;
+            this.piece = new JButton("WBishop");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, 1);
+        }
 
+        else if(piece == "bishop" && !is_white){
+            type = "bishop";
+            name = "bbishop";
+            this.is_white = false;
+            switch(number){
+                case 1:
+                    x_cor = 900;
+                    break;
+                case 2:
+                    x_cor = 1200;
+                    break;
+            }
+            y_cor = 100;
+            this.piece = new JButton("BBishop");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, 1);
+        }
     }
 
     public void move(int[] cords){
@@ -53,12 +88,12 @@ public class Piece {
 
     public void remove_black(java.util.List<Piece> black_pieces, Piece current_piece){
         black_pieces.remove(current_piece);
-        piece.setBounds(2000,2000,100,100);
+        frame.remove(piece);
     }
 
     public void remove_white(java.util.List<Piece> white_pieces, Piece current_piece){
         white_pieces.remove(current_piece);
-        piece.setBounds(2000,2000,100,100);
+        frame.remove(piece);
     }
     public void de_select(){
         piece.setText(name);
@@ -84,4 +119,5 @@ public class Piece {
     public JButton get_piece(){
         return piece;
     }
+
 }

@@ -26,7 +26,13 @@ public class Main {
         //Setup white pawns
         for (int i = 1; i <= 8; i++) {
             Piece white_pawn = new Piece("pawn", true, i, layeredPane);
-            white_pawn.get_piece().addActionListener(e -> move_checker.get_moves(white_pawn, true, engine));
+            white_pawn.get_piece().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    move_checker.get_cords(white_pawn, engine);
+                    move_checker.get_moves(white_pawn, true, engine);
+                }
+            });
             white_pieces.add(white_pawn);
         }
 
@@ -43,9 +49,35 @@ public class Main {
             black_pieces.add(black_pawn);
         }
 
+        //Setup white bishiops
+        for(int i=1; i<3; i++) {
+            Piece white_bishop = new Piece("bishop", true, i, layeredPane);
+            white_bishop.get_piece().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    move_checker.get_cords(white_bishop, engine);
+                    move_checker.get_moves(white_bishop, true, engine);
+                }
+            });
+            white_pieces.add(white_bishop);
+        }
+        //black bishops
+        for(int i=1; i<3; i++) {
+            Piece black_bishop = new Piece("bishop", false, i, layeredPane);
+            black_bishop.get_piece().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    move_checker.get_cords(black_bishop, engine);
+                    move_checker.get_moves(black_bishop, false, engine);
+                }
+            });
+            black_pieces.add(black_bishop);
+        }
+        //white knight
+
+
         // parse lists into moves
         engine.get_list(white_pieces, black_pieces);
-
         root.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         root.setSize(1920,1080);
         root.setLayout(null);
