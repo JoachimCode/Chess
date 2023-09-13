@@ -35,16 +35,26 @@ public class Engine {
         }
 
         else if(phase == 1 && white_turn && !piece.get_white()){
-            if(check_white_take(piece_cords)){
-                move_piece(piece_cords);
-                current_piece.remove_black(black_pieces, current_piece);
+            int x = piece.get_x();
+            int y = piece.get_y();
+            int[] cords = {x,y};
+            if(check_white(cords)) {
+                if(check_white_take(piece_cords)) {
+                    move_piece(piece_cords);
+                    current_piece.remove_black(black_pieces, current_piece);
+                }
             }
         }
 
         else if(phase == 1 && !white_turn && piece.get_white()){
-            if(check_black_take(piece_cords)){
-                move_piece(piece_cords);
-                current_piece.remove_white(white_pieces, current_piece);
+            int x = piece.get_x();
+            int y = piece.get_y();
+            int[] cords = {x,y};
+            if(check_white(cords)){
+                if(check_black_take(piece_cords)){
+                    move_piece(piece_cords);
+                    current_piece.remove_white(white_pieces, current_piece);
+                }
             }
         }
     }
@@ -106,6 +116,7 @@ public class Engine {
     }
     public void move_piece(int[] cords){
         last_piece.move(cords);
+        last_piece.de_select();
         phase = 0;
         move_set.clear();
         white_turn = !white_turn;

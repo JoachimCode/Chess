@@ -23,7 +23,7 @@ public class Piece {
             y_cor = 700;
             this.piece = new JButton("Wpawn");
             this.piece.setBounds(x_cor, y_cor, width, height);
-            layeredPane.add(this.piece, 1);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
         else if(piece == "pawn" && !is_white){
             type = "pawn";
@@ -33,7 +33,7 @@ public class Piece {
             y_cor = 200;
             this.piece = new JButton("Bpawn");
             this.piece.setBounds(x_cor, y_cor, width, height);
-            layeredPane.add(this.piece, 1);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
         else if(piece == "bishop" && is_white){
             type = "bishop";
@@ -50,7 +50,7 @@ public class Piece {
             y_cor = 800;
             this.piece = new JButton("WBishop");
             this.piece.setBounds(x_cor, y_cor, width, height);
-            layeredPane.add(this.piece, 1);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
 
         else if(piece == "bishop" && !is_white){
@@ -68,7 +68,7 @@ public class Piece {
             y_cor = 100;
             this.piece = new JButton("BBishop");
             this.piece.setBounds(x_cor, y_cor, width, height);
-            layeredPane.add(this.piece, 1);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
     }
 

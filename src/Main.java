@@ -8,7 +8,9 @@ public class Main {
     public static void main(String[] args) {
         JFrame root = new JFrame();
         JLayeredPane layeredPane = root.getLayeredPane();
-        Moves move_checker = new Moves();
+        java.util.List<Piece> white_pieces = new ArrayList<Piece>();
+        java.util.List<Piece> black_pieces = new ArrayList<Piece>();
+        Moves move_checker = new Moves(black_pieces, white_pieces);
 
         //game engine
         Engine engine = new Engine();
@@ -20,8 +22,6 @@ public class Main {
         }
 
         //Setup both list
-        java.util.List<Piece> white_pieces = new ArrayList<Piece>();
-        java.util.List<Piece> black_pieces = new ArrayList<Piece>();
 
         //Setup white pawns
         for (int i = 1; i <= 8; i++) {
@@ -80,7 +80,7 @@ public class Main {
         engine.get_list(white_pieces, black_pieces);
         root.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         root.setSize(1920,1080);
-        root.setLayout(null);
+        //root.setLayout(null);
         root.setVisible(true);
 
     }

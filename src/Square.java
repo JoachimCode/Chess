@@ -79,7 +79,7 @@ public class Square {
 
         //Set Jbuttons coordinates and spawn
         square.setBounds(x_cor,y_cor,width,height);
-        layeredPane.add(square, 0);
+        layeredPane.add(square, JLayeredPane.DEFAULT_LAYER);
     }
 
     public void get_cord(){

@@ -2,7 +2,14 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Moves {
+    private java.util.List<Piece> white_pieces;
+    private java.util.List<Piece> black_pieces;
     private java.util.List<int[]> possible_moves = new ArrayList<int[]>();
+
+    public Moves(java.util.List<Piece> black_pieces, java.util.List<Piece> white_pieces){
+        this.black_pieces = black_pieces;
+        this.white_pieces = white_pieces;
+    }
 
     public void get_moves(Piece piece, boolean is_white, Engine engine){
 
@@ -32,6 +39,9 @@ public class Moves {
         engine.click_piece(piece);
     }
 
+    public void get_list(){
+
+    }
     public void get_cords(Piece piece, Engine engine){
         int[] cords;
         cords = new int[2];
@@ -83,26 +93,111 @@ public class Moves {
         put_moves(x,y);
     }
 
-    private void bishop_move(Piece piece){
+
+    private void bishop_move(Piece piece) {
         int x;
         int y;
-        for(int i = 1; i <= 8; i++){
-            x = piece.get_x() + move("right")*i;
-            y = piece.get_y() + move("up")*i;
-            put_moves(x,y);
+        for (int i = 1; i <= 8; i++) {
+            boolean exit = false;
+            x = piece.get_x() + move("right") * i;
+            y = piece.get_y() + move("up") * i;
+            for(Piece take_list : black_pieces){
+                int piece_x = take_list.get_x();
+                int piece_y = take_list.get_y();
+                if (x == piece_x && y == piece_y) {
+                    exit = true;
+                    break;
+                }
+            }
+            for(Piece take_list : white_pieces){
+                int piece_x = take_list.get_x();
+                int piece_y = take_list.get_y();
+                if (x == piece_x && y == piece_y) {
+                    exit = true;
+                    break;
+                }
+            }
+            if(exit){
+                break;
+            }
+            put_moves(x, y);
+        }
+        for (int i = 1; i <= 8; i++) {
+            x = piece.get_x() + move("left") * i;
+            y = piece.get_y() + move("up") * i;
+            boolean exit = false;
+            for(Piece take_list : black_pieces){
+                int piece_x = take_list.get_x();
+                int piece_y = take_list.get_y();
+                if (x == piece_x && y == piece_y) {
+                    exit = true;
+                    break;
+                }
+            }
+            for(Piece take_list : white_pieces){
+                int piece_x = take_list.get_x();
+                int piece_y = take_list.get_y();
+                if (x == piece_x && y == piece_y) {
+                    exit = true;
+                    break;
+                }
+            }
+            if(exit){
+                break;
+            }
+            put_moves(x, y);
+        }
 
-            x = piece.get_x() + move("left")*i;
-            y = piece.get_y() + move("up")*i;
-            put_moves(x,y);
-
-            x = piece.get_x() + move("left")*i;
-            y = piece.get_y() + move("down")*i;
-            put_moves(x,y);
-
-            x = piece.get_x() + move("right")*i;
-            y = piece.get_y() + move("down")*i;
-            put_moves(x,y);
+        for (int i = 1; i <= 8; i++) {
+            boolean exit = false;
+            x = piece.get_x() + move("left") * i;
+            y = piece.get_y() + move("down") * i;
+            for(Piece take_list : black_pieces){
+                int piece_x = take_list.get_x();
+                int piece_y = take_list.get_y();
+                if (x == piece_x && y == piece_y) {
+                    exit = true;
+                    break;
+                }
+            }
+            for(Piece take_list : white_pieces){
+                int piece_x = take_list.get_x();
+                int piece_y = take_list.get_y();
+                if (x == piece_x && y == piece_y) {
+                    exit = true;
+                    break;
+                }
+            }
+            if(exit){
+                break;
+            }
+            put_moves(x, y);
+        }
+        for (int i = 1; i <= 8; i++) {
+            boolean exit = false;
+            x = piece.get_x() + move("right") * i;
+            y = piece.get_y() + move("down") * i;
+            for(Piece take_list : black_pieces){
+                int piece_x = take_list.get_x();
+                int piece_y = take_list.get_y();
+                if (x == piece_x && y == piece_y) {
+                    exit = true;
+                    break;
+                }
+            }
+            for(Piece take_list : white_pieces){
+                int piece_x = take_list.get_x();
+                int piece_y = take_list.get_y();
+                if (x == piece_x && y == piece_y) {
+                    exit = true;
+                    break;
+                }
+            }
+            if(exit){
+                break;
+            }
+            put_moves(x, y);
         }
     }
-}
+    }
 
