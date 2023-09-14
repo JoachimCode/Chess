@@ -50,7 +50,7 @@ public class Engine {
             int x = piece.get_x();
             int y = piece.get_y();
             int[] cords = {x,y};
-            if(check_white(cords)){
+            if(check_black(cords)){
                 if(check_black_take(piece_cords)){
                     move_piece(piece_cords);
                     current_piece.remove_white(white_pieces, current_piece);
@@ -125,5 +125,18 @@ public class Engine {
     public void get_list(java.util.List<Piece> white_list, java.util.List<Piece> black_list){
         white_pieces = white_list;
         black_pieces = black_list;
+    }
+
+    public boolean right_turn(Piece piece){
+        if(piece.get_white() == white_turn){
+            return true;
+        }
+        else if(!piece.get_white() == !white_turn){
+            return true;
+        }
+        else{
+            return false;
+
+        }
     }
 }

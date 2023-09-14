@@ -12,30 +12,38 @@ public class Moves {
     }
 
     public void get_moves(Piece piece, boolean is_white, Engine engine){
-
-        possible_moves.clear();
-        //check white pawns
-        if(Objects.equals(piece.get_type(), "pawn") && piece.get_white() && engine.white_turn){
-            //check if pawns has not moved
-            if(piece.get_start()){
-                white_pawn_move(piece, true);
-            }
+        if(engine.right_turn(piece)){
+            possible_moves.clear();
+            //check white pawns
+            if (Objects.equals(piece.get_type(), "pawn") && piece.get_white() && engine.white_turn) {
+                //check if pawns has not moved
+                if (piece.get_start()) {
+                    white_pawn_move(piece, true);
+                }
                 white_pawn_move(piece, false);
-        }
-
-        //check black pawns
-        if(Objects.equals(piece.get_type(), "pawn") && !piece.get_white() && !engine.white_turn){
-            //check if pawns has not moved
-            if(piece.get_start()){
-                black_pawn_move(piece, true);
             }
-            black_pawn_move(piece, false);
+
+            //check black pawns
+            if (Objects.equals(piece.get_type(), "pawn") && !piece.get_white() && !engine.white_turn) {
+                //check if pawns has not moved
+                if (piece.get_start()) {
+                    black_pawn_move(piece, true);
+                }
+                black_pawn_move(piece, false);
+            }
+            //check bishops
+            if (Objects.equals(piece.get_type(), "bishop")) {
+                bishop_move(piece);
+            }
+            engine.set_move(possible_moves);
+            engine.click_piece(piece);
+
+            //check knight
+            if (Objects.equals(piece.get_type(), "knight")) {
+                knight_move(piece);
+            }
+            engine.set_move(possible_moves);
         }
-        //check white bishops
-        if(Objects.equals(piece.get_type(), "bishop")){
-            bishop_move(piece);
-        }
-        engine.set_move(possible_moves);
         engine.click_piece(piece);
     }
 
@@ -93,7 +101,37 @@ public class Moves {
         put_moves(x,y);
     }
 
+    private void knight_move(Piece piece){
+        int x;
+        int y;
+        //upwards
+        y = piece.get_y() + move("up")*2;
+        x = piece.get_x() + move("right");
+        put_moves(x,y);
+        x = x + move("left")*2;
+        put_moves(x,y);
 
+        // right
+        x = piece.get_x() + move("right")*2;
+        y = piece.get_y() + move("up");
+        put_moves(x,y);
+        y = y + move("down")*2;
+        put_moves(x,y);
+
+        //down
+        y = piece.get_y() + move("down")*2;
+        x = piece.get_x() + move("right");
+        put_moves(x,y);
+        x = x + move("left")*2;
+        put_moves(x,y);
+
+        // left
+        x = piece.get_x() + move("left")*2;
+        y = piece.get_y() + move("up");
+        put_moves(x,y);
+        y = y + move("down")*2;
+        put_moves(x,y);
+    }
     private void bishop_move(Piece piece) {
         int x;
         int y;
@@ -101,22 +139,27 @@ public class Moves {
             boolean exit = false;
             x = piece.get_x() + move("right") * i;
             y = piece.get_y() + move("up") * i;
+
             for(Piece take_list : black_pieces){
                 int piece_x = take_list.get_x();
                 int piece_y = take_list.get_y();
                 if (x == piece_x && y == piece_y) {
+                    put_moves(x,y);
                     exit = true;
                     break;
                 }
             }
+
             for(Piece take_list : white_pieces){
                 int piece_x = take_list.get_x();
                 int piece_y = take_list.get_y();
                 if (x == piece_x && y == piece_y) {
+                    put_moves(x,y);
                     exit = true;
                     break;
                 }
             }
+
             if(exit){
                 break;
             }
@@ -130,6 +173,7 @@ public class Moves {
                 int piece_x = take_list.get_x();
                 int piece_y = take_list.get_y();
                 if (x == piece_x && y == piece_y) {
+                    put_moves(x,y);
                     exit = true;
                     break;
                 }
@@ -138,6 +182,7 @@ public class Moves {
                 int piece_x = take_list.get_x();
                 int piece_y = take_list.get_y();
                 if (x == piece_x && y == piece_y) {
+                    put_moves(x,y);
                     exit = true;
                     break;
                 }
@@ -156,6 +201,7 @@ public class Moves {
                 int piece_x = take_list.get_x();
                 int piece_y = take_list.get_y();
                 if (x == piece_x && y == piece_y) {
+                    put_moves(x,y);
                     exit = true;
                     break;
                 }
@@ -164,6 +210,7 @@ public class Moves {
                 int piece_x = take_list.get_x();
                 int piece_y = take_list.get_y();
                 if (x == piece_x && y == piece_y) {
+                    put_moves(x,y);
                     exit = true;
                     break;
                 }
@@ -181,6 +228,7 @@ public class Moves {
                 int piece_x = take_list.get_x();
                 int piece_y = take_list.get_y();
                 if (x == piece_x && y == piece_y) {
+                    put_moves(x,y);
                     exit = true;
                     break;
                 }
@@ -189,6 +237,7 @@ public class Moves {
                 int piece_x = take_list.get_x();
                 int piece_y = take_list.get_y();
                 if (x == piece_x && y == piece_y) {
+                    put_moves(x,y);
                     exit = true;
                     break;
                 }

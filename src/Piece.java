@@ -55,7 +55,7 @@ public class Piece {
 
         else if(piece == "bishop" && !is_white){
             type = "bishop";
-            name = "bbishop";
+            name = "Bbishop";
             this.is_white = false;
             switch(number){
                 case 1:
@@ -70,7 +70,44 @@ public class Piece {
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
-    }
+
+        else if(piece == "knight" && is_white){
+            type = "knight";
+            name = "Wknight";
+            this.is_white = true;
+            switch(number){
+                case 1:
+                    x_cor = 800;
+                    break;
+                case 2:
+                    x_cor = 1300;
+                    break;
+            }
+            y_cor = 800;
+            this.piece = new JButton("WKnight");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
+            }
+
+        else if(piece == "knight" && !is_white){
+            type = "knight";
+            name = "Bknight";
+            this.is_white = false;
+            switch(number){
+                case 1:
+                    x_cor = 800;
+                    break;
+                case 2:
+                    x_cor = 1300;
+                    break;
+            }
+            y_cor = 100;
+            this.piece = new JButton("BKnight");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
+        }
+        }
+
 
     public void move(int[] cords){
         int x = cords[0];
