@@ -86,7 +86,7 @@ public class Main {
             });
             white_pieces.add(white_knight);
         }
-
+        //black knight
         for (int i = 1; i < 3; i++) {
             Piece black_knight = new Piece("knight", false, i, layeredPane);
             black_knight.get_piece().addActionListener(new ActionListener() {
@@ -99,12 +99,80 @@ public class Main {
             black_pieces.add(black_knight);
         }
 
-            // parse lists into moves
-            engine.get_list(white_pieces, black_pieces);
-            root.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            root.setSize(1920, 1080);
-            //root.setLayout(null);
-            root.setVisible(true);
+        //white rook
+        for (int i = 1; i < 3; i++) {
+            Piece white_rook = new Piece("rook", true, i, layeredPane);
+            white_rook.get_piece().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    move_checker.get_cords(white_rook, engine);
+                    move_checker.get_moves(white_rook, true, engine);
+                }
+            });
+            white_pieces.add(white_rook);
+        }
+        //black rook
+        for (int i = 1; i < 3; i++) {
+            Piece black_rook = new Piece("rook", false, i, layeredPane);
+            black_rook.get_piece().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    move_checker.get_cords(black_rook, engine);
+                    move_checker.get_moves(black_rook, false, engine);
+                }
+            });
+            black_pieces.add(black_rook);
+        }
+        //White queen
+        Piece white_queen = new Piece("queen", true, 1, layeredPane);
+        white_queen.get_piece().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move_checker.get_cords(white_queen, engine);
+                move_checker.get_moves(white_queen, true, engine);
+            }
+        });
+        white_pieces.add(white_queen);
+
+        //Black queen
+        Piece black_queen = new Piece("queen", false, 1, layeredPane);
+        black_queen.get_piece().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move_checker.get_cords(black_queen, engine);
+                move_checker.get_moves(black_queen, false, engine);
+            }
+        });
+        black_pieces.add(black_queen);
+
+        //white King
+        Piece white_king = new Piece("king", true, 1, layeredPane);
+        white_king.get_piece().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move_checker.get_cords(white_king, engine);
+                move_checker.get_moves(white_king, true, engine);
+            }
+        });
+        white_pieces.add(white_king);
+
+        //Black king
+        Piece black_king = new Piece("king", false, 1, layeredPane);
+        black_king.get_piece().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move_checker.get_cords(black_king, engine);
+                move_checker.get_moves(black_king, false, engine);
+            }
+        });
+        black_pieces.add(black_king);
+
+        // parse lists into moves
+        engine.get_list(white_pieces, black_pieces);
+        root.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        root.setSize(1920, 1080);
+        //root.setLayout(null);
+        root.setVisible(true);
 
         }
     }

@@ -106,6 +106,87 @@ public class Piece {
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
+
+        else if(piece == "rook" && is_white){
+            type = "rook";
+            name = "WRook";
+            this.is_white = true;
+            switch(number){
+                case 1:
+                    x_cor = 700;
+                    break;
+                case 2:
+                    x_cor = 1400;
+                    break;
+            }
+            y_cor = 800;
+            this.piece = new JButton("WRook");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
+        }
+
+        else if(piece == "rook" && !is_white){
+            type = "rook";
+            name = "BRook";
+            this.is_white = false;
+            switch(number){
+                case 1:
+                    x_cor = 700;
+                    break;
+                case 2:
+                    x_cor = 1400;
+                    break;
+            }
+            y_cor = 100;
+            this.piece = new JButton("BRook");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
+        }
+
+        else if(piece == "queen" && is_white){
+            type = "queen";
+            name = "WQueen";
+            this.is_white = true;
+            x_cor = 1000;
+            y_cor = 800;
+            this.piece = new JButton("WQueen");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
+        }
+
+        else if(piece == "queen" && !is_white){
+            type = "queen";
+            name = "BQueen";
+            this.is_white = false;
+            x_cor = 1100;
+            y_cor = 100;
+            this.piece = new JButton("BQueen");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
+        }
+
+        else if(piece == "king" && is_white){
+            type = "king";
+            name = "WKing";
+            this.is_white = true;
+            x_cor = 1100;
+            y_cor = 800;
+            this.piece = new JButton("WKing");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
+        }
+
+        else if(piece == "king" && !is_white){
+            type = "king";
+            name = "BKing";
+            this.is_white = false;
+            x_cor = 1000;
+            y_cor = 100;
+            this.piece = new JButton("BKing");
+            this.piece.setBounds(x_cor, y_cor, width, height);
+            layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
+        }
+
         }
 
 
