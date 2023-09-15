@@ -5,6 +5,7 @@ public class Moves {
     private java.util.List<Piece> white_pieces;
     private java.util.List<Piece> black_pieces;
     private java.util.List<int[]> possible_moves = new ArrayList<int[]>();
+    private java.util.List<int[]> pawn_possible_moves = new ArrayList<int[]>();
 
     public Moves(java.util.List<Piece> black_pieces, java.util.List<Piece> white_pieces){
         this.black_pieces = black_pieces;
@@ -13,6 +14,7 @@ public class Moves {
 
     public void get_moves(Piece piece, boolean is_white, Engine engine){
         if(engine.right_turn(piece)){
+            pawn_possible_moves.clear();
             possible_moves.clear();
             //check white pawns
             if (Objects.equals(piece.get_type(), "pawn") && piece.get_white() && engine.white_turn) {
@@ -21,6 +23,12 @@ public class Moves {
                     white_pawn_move(piece, true);
                 }
                 white_pawn_move(piece, false);
+
+                //pawn take
+                if (piece.get_white()){
+                    white_pawn_take_move(piece);
+                }
+                engine.pawn_move_set = pawn_possible_moves;
             }
 
             //check black pawns
@@ -30,7 +38,13 @@ public class Moves {
                     black_pawn_move(piece, true);
                 }
                 black_pawn_move(piece, false);
+                //pawn take
+                if (!piece.get_white()){
+                    black_pawn_take_move(piece);
+                }
+                engine.pawn_move_set = pawn_possible_moves;
             }
+
             //check bishops
             if (Objects.equals(piece.get_type(), "bishop")) {
                 bishop_move(piece);
@@ -83,6 +97,14 @@ public class Moves {
         possible_moves.add(cords);
     }
 
+    public void put_moves_pawn(int x, int y){
+        int[] cords;
+        cords = new int[2];
+        cords[0] = x;
+        cords[1] = y;
+        pawn_possible_moves.add(cords);
+    }
+
     public int move(String direction){
         if(direction == "up" || direction == "left"){
             return -100;
@@ -126,6 +148,23 @@ public class Moves {
             y = piece.get_y() + move("up");
         }
         put_moves(x,y);
+    }
+
+
+    private void white_pawn_take_move(Piece piece){
+        int y = piece.get_y() + move("up");
+        int x = piece.get_x() + move("left");
+        put_moves_pawn(x,y);
+        x = x + move("right")*2;
+        put_moves_pawn(x,y);
+    }
+
+    private void black_pawn_take_move(Piece piece){
+        int y = piece.get_y() + move("down");
+        int x = piece.get_x() + move("left");
+        put_moves_pawn(x,y);
+        x = x + move("right")*2;
+        put_moves_pawn(x,y);
     }
 
     private void black_pawn_move(Piece piece, boolean is_start){

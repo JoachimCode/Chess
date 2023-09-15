@@ -154,6 +154,7 @@ public class Main {
                 move_checker.get_moves(white_king, true, engine);
             }
         });
+        engine.get_king(white_king, true);
         white_pieces.add(white_king);
 
         //Black king
@@ -165,6 +166,7 @@ public class Main {
                 move_checker.get_moves(black_king, false, engine);
             }
         });
+        engine.get_king(black_king, false);
         black_pieces.add(black_king);
 
         // parse lists into moves

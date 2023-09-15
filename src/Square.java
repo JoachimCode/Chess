@@ -56,6 +56,7 @@ public class Square {
         }
         //end
 
+
         // Check if odd or even and create button
         if(row % 2 != 0) {
             if (number % 2 == 0) {

@@ -1,6 +1,13 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.InputStream;
+
 public class Piece {
     private boolean start = true;
     private int x_cor;
@@ -12,6 +19,7 @@ public class Piece {
     private boolean is_white;
     private JButton piece;
     private JLayeredPane frame;
+
     public Piece(String piece, boolean is_white, int number, JLayeredPane layeredPane){
         frame = layeredPane;
         //Pawn
@@ -21,7 +29,17 @@ public class Piece {
             this.is_white = true;
             x_cor = 600 + 100*(number);
             y_cor = 700;
-            this.piece = new JButton("Wpawn");
+            Image k;
+            try {
+                k = ImageIO.read(new File("white_pawn.png"));
+            }
+            catch (Exception lol){
+                k = null;
+            }
+            k = k.getScaledInstance(100, 100,0);
+            this.piece = new JButton(new ImageIcon(k));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
@@ -31,7 +49,17 @@ public class Piece {
             this.is_white = false;
             x_cor = 600 + 100*(number);
             y_cor = 200;
-            this.piece = new JButton("Bpawn");
+            Image k;
+            try {
+                k = ImageIO.read(new File("black_pawn.png"));
+            }
+            catch (Exception lol){
+                k = null;
+            }
+            k = k.getScaledInstance(100, 100,0);
+            this.piece = new JButton(new ImageIcon(k));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
@@ -48,7 +76,9 @@ public class Piece {
                     break;
             }
             y_cor = 800;
-            this.piece = new JButton("WBishop");
+            this.piece = new JButton(new ImageIcon(get_image("white_bishop.png")));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
@@ -66,7 +96,9 @@ public class Piece {
                     break;
             }
             y_cor = 100;
-            this.piece = new JButton("BBishop");
+            this.piece = new JButton(new ImageIcon(get_image("black_bishop.png")));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
@@ -84,7 +116,9 @@ public class Piece {
                     break;
             }
             y_cor = 800;
-            this.piece = new JButton("WKnight");
+            this.piece = new JButton(new ImageIcon(get_image("white_knight.png")));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
             }
@@ -102,7 +136,9 @@ public class Piece {
                     break;
             }
             y_cor = 100;
-            this.piece = new JButton("BKnight");
+            this.piece = new JButton(new ImageIcon(get_image("black_knight.png")));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
@@ -120,7 +156,9 @@ public class Piece {
                     break;
             }
             y_cor = 800;
-            this.piece = new JButton("WRook");
+            this.piece = new JButton(new ImageIcon(get_image("white_rook.png")));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
@@ -138,7 +176,9 @@ public class Piece {
                     break;
             }
             y_cor = 100;
-            this.piece = new JButton("BRook");
+            this.piece = new JButton(new ImageIcon(get_image("black_rook.png")));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
@@ -149,7 +189,9 @@ public class Piece {
             this.is_white = true;
             x_cor = 1000;
             y_cor = 800;
-            this.piece = new JButton("WQueen");
+            this.piece = new JButton(new ImageIcon(get_image("white_queen.png")));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
@@ -158,9 +200,11 @@ public class Piece {
             type = "queen";
             name = "BQueen";
             this.is_white = false;
-            x_cor = 1100;
+            x_cor = 1000;
             y_cor = 100;
-            this.piece = new JButton("BQueen");
+            this.piece = new JButton(new ImageIcon(get_image("black_queen.png")));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
@@ -171,7 +215,9 @@ public class Piece {
             this.is_white = true;
             x_cor = 1100;
             y_cor = 800;
-            this.piece = new JButton("WKing");
+            this.piece = new JButton(new ImageIcon(get_image("white_king.png")));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
@@ -180,16 +226,32 @@ public class Piece {
             type = "king";
             name = "BKing";
             this.is_white = false;
-            x_cor = 1000;
+            x_cor = 1100;
             y_cor = 100;
-            this.piece = new JButton("BKing");
+            this.piece = new JButton(new ImageIcon(get_image("black_king.png")));
+            this.piece.setContentAreaFilled(false);
+            this.piece.setBorderPainted(false);
             this.piece.setBounds(x_cor, y_cor, width, height);
             layeredPane.add(this.piece, JLayeredPane.PALETTE_LAYER);
         }
 
+    }
+
+    public String get_piece_type(){
+        return type;
+    }
+
+    public Image get_image(String image_path){
+        Image image;
+        try {
+            image = ImageIO.read(new File(image_path));
         }
-
-
+        catch (Exception lol){
+            image = null;
+        }
+        image = image.getScaledInstance(100, 100,0);
+        return image;
+    }
     public void move(int[] cords){
         int x = cords[0];
         int y = cords[1];
@@ -200,7 +262,8 @@ public class Piece {
     }
 
     public void show(){
-        piece.setText("selected");
+        piece.setBorderPainted(true);
+        piece.setBorder(BorderFactory.createLineBorder(Color.yellow, 4));
 
     }
 
@@ -213,8 +276,11 @@ public class Piece {
         white_pieces.remove(current_piece);
         frame.remove(piece);
     }
+
     public void de_select(){
-        piece.setText(name);
+        piece.setBorderPainted(false);
+
+
     }
 
     public String get_type(){
