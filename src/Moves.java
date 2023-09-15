@@ -7,12 +7,14 @@ public class Moves {
     private java.util.List<int[]> possible_moves = new ArrayList<int[]>();
     private java.util.List<int[]> pawn_possible_moves = new ArrayList<int[]>();
 
+
+
     public Moves(java.util.List<Piece> black_pieces, java.util.List<Piece> white_pieces){
         this.black_pieces = black_pieces;
         this.white_pieces = white_pieces;
     }
 
-    public void get_moves(Piece piece, boolean is_white, Engine engine){
+    public void get_moves(Piece piece, Engine engine){
         if(engine.right_turn(piece)){
             pawn_possible_moves.clear();
             possible_moves.clear();
@@ -74,7 +76,70 @@ public class Moves {
             }
             engine.set_move(possible_moves);
         }
+        engine.set_check_move(possible_moves);
         engine.click_piece(piece);
+    }
+
+    public void get_check(Piece piece, Engine engine){
+        possible_moves.clear();
+        pawn_possible_moves.clear();
+        //check white pawns
+        if (Objects.equals(piece.get_type(), "pawn") && piece.get_white()) {
+            //check if pawns has not moved
+            if (piece.get_start()) {
+                white_pawn_move(piece, true);
+            }
+            white_pawn_move(piece, false);
+
+            //pawn take
+            if (piece.get_white()){
+                white_pawn_take_move(piece);
+            }
+            engine.pawn_move_set = pawn_possible_moves;
+        }
+
+        //check black pawns
+        if (Objects.equals(piece.get_type(), "pawn") && !piece.get_white()) {
+            //check if pawns has not moved
+            if (piece.get_start()) {
+                black_pawn_move(piece, true);
+            }
+            black_pawn_move(piece, false);
+            //pawn take
+            if (!piece.get_white()){
+                black_pawn_take_move(piece);
+            }
+            engine.pawn_move_set = pawn_possible_moves;
+        }
+
+        //check bishops
+        if (Objects.equals(piece.get_type(), "bishop")) {
+            bishop_move(piece);
+        }
+        engine.set_check_move(possible_moves);
+        //engine.click_piece(piece);
+
+        //check knight
+        if (Objects.equals(piece.get_type(), "knight")) {
+            knight_move(piece);
+        }
+        engine.set_check_move(possible_moves);
+
+        //check rook
+        if (Objects.equals(piece.get_type(), "rook")) {
+            rook_move(piece);
+        }
+        engine.set_check_move(possible_moves);
+
+        //check queen
+        if (Objects.equals(piece.get_type(), "queen")) {
+            queen_move(piece);
+        }
+        engine.set_move(possible_moves);
+        if (Objects.equals(piece.get_type(), "king")) {
+            king_move(piece, true);
+        }
+        engine.set_check_move(possible_moves);
     }
 
     public void get_list(){

@@ -267,6 +267,11 @@ public class Piece {
 
     }
 
+    public void check_show(){
+        piece.setBorderPainted(true);
+        piece.setBorder(BorderFactory.createLineBorder(Color.red, 4));
+    }
+
     public void remove_black(java.util.List<Piece> black_pieces, Piece current_piece){
         black_pieces.remove(current_piece);
         frame.remove(piece);

@@ -3,8 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
-//KNIGHT CANT TAKE
-//CLICK PIECE THEN ENEMY GET THEIR POSSIBLE MOVES
 public class Main {
     public static void main(String[] args) {
         JFrame root = new JFrame();
@@ -31,7 +29,7 @@ public class Main {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     move_checker.get_cords(white_pawn, engine);
-                    move_checker.get_moves(white_pawn, true, engine);
+                    move_checker.get_moves(white_pawn, engine);
                 }
             });
             white_pieces.add(white_pawn);
@@ -44,7 +42,7 @@ public class Main {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     move_checker.get_cords(black_pawn, engine);
-                    move_checker.get_moves(black_pawn, true, engine);
+                    move_checker.get_moves(black_pawn, engine);
                 }
             });
             black_pieces.add(black_pawn);
@@ -57,7 +55,7 @@ public class Main {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     move_checker.get_cords(white_bishop, engine);
-                    move_checker.get_moves(white_bishop, true, engine);
+                    move_checker.get_moves(white_bishop, engine);
                 }
             });
             white_pieces.add(white_bishop);
@@ -69,7 +67,7 @@ public class Main {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     move_checker.get_cords(black_bishop, engine);
-                    move_checker.get_moves(black_bishop, false, engine);
+                    move_checker.get_moves(black_bishop, engine);
                 }
             });
             black_pieces.add(black_bishop);
@@ -81,7 +79,7 @@ public class Main {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     move_checker.get_cords(white_knight, engine);
-                    move_checker.get_moves(white_knight, true, engine);
+                    move_checker.get_moves(white_knight, engine);
                 }
             });
             white_pieces.add(white_knight);
@@ -93,7 +91,7 @@ public class Main {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     move_checker.get_cords(black_knight, engine);
-                    move_checker.get_moves(black_knight, false, engine);
+                    move_checker.get_moves(black_knight,engine);
                 }
             });
             black_pieces.add(black_knight);
@@ -106,7 +104,7 @@ public class Main {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     move_checker.get_cords(white_rook, engine);
-                    move_checker.get_moves(white_rook, true, engine);
+                    move_checker.get_moves(white_rook, engine);
                 }
             });
             white_pieces.add(white_rook);
@@ -118,7 +116,7 @@ public class Main {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     move_checker.get_cords(black_rook, engine);
-                    move_checker.get_moves(black_rook, false, engine);
+                    move_checker.get_moves(black_rook, engine);
                 }
             });
             black_pieces.add(black_rook);
@@ -129,7 +127,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 move_checker.get_cords(white_queen, engine);
-                move_checker.get_moves(white_queen, true, engine);
+                move_checker.get_moves(white_queen,engine);
             }
         });
         white_pieces.add(white_queen);
@@ -140,7 +138,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 move_checker.get_cords(black_queen, engine);
-                move_checker.get_moves(black_queen, false, engine);
+                move_checker.get_moves(black_queen,  engine);
             }
         });
         black_pieces.add(black_queen);
@@ -151,10 +149,9 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 move_checker.get_cords(white_king, engine);
-                move_checker.get_moves(white_king, true, engine);
+                move_checker.get_moves(white_king,engine);
             }
         });
-        engine.get_king(white_king, true);
         white_pieces.add(white_king);
 
         //Black king
@@ -163,10 +160,10 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 move_checker.get_cords(black_king, engine);
-                move_checker.get_moves(black_king, false, engine);
+                move_checker.get_moves(black_king, engine);
             }
         });
-        engine.get_king(black_king, false);
+        engine.get_king(black_king, white_king);
         black_pieces.add(black_king);
 
         // parse lists into moves
